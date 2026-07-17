@@ -11,7 +11,8 @@ struct URLSessionSnapshotClient: SnapshotFetching {
               let scheme = components.scheme?.lowercased(), ["https", "http"].contains(scheme),
               let host = components.host, !host.isEmpty,
               scheme == "https" || ["localhost", "127.0.0.1", "::1"].contains(host.lowercased()) else { return nil }
-        components.path = components.path.trimmingCharacters(in: CharacterSet(charactersIn: "/")) + "/api/snapshot"
+        let basePath = components.path.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+        components.path = "/" + [basePath, "api", "snapshot"].filter { !$0.isEmpty }.joined(separator: "/")
         components.query = nil
         components.fragment = nil
         return components.url

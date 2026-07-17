@@ -58,6 +58,13 @@ private struct DashboardView: View {
     private var overviewTab: some View {
         ScrollView { LazyVStack(spacing: 10) {
             header
+            ForEach((snapshot.alerts ?? []).prefix(3)) { alert in
+                HStack(alignment: .top, spacing: 10) {
+                    Image(systemName: alert.severity == "critical" ? "exclamationmark.octagon.fill" : "exclamationmark.triangle.fill").foregroundStyle(alert.severity == "critical" ? .red : .orange)
+                    VStack(alignment: .leading, spacing: 4) { Text(alert.title).font(.caption.bold()); Text(alert.detail).font(.caption2).foregroundStyle(.secondary); Text(alert.action).font(.caption2).foregroundStyle(.primary) }
+                    Spacer(minLength: 0)
+                }.padding(12).background((alert.severity == "critical" ? Color.red : Color.orange).opacity(0.07)).overlay(RoundedRectangle(cornerRadius: 13).stroke((alert.severity == "critical" ? Color.red : Color.orange).opacity(0.2))).clipShape(.rect(cornerRadius: 13))
+            }
             VStack(alignment: .leading, spacing: 7) { Text("TOKENS TODAY").metricLabel(); Text(snapshot.total.compact).font(.system(size: 56, weight: .bold, design: .rounded)); Text("\(snapshot.sessions) sessions across \(snapshot.platforms.filter(\.connected).count) runtimes").font(.caption).foregroundStyle(.secondary) }.frame(maxWidth: .infinity, alignment: .leading).padding(.vertical, 18)
             HStack(spacing: 8) { MetricTile(label: "FRESH INPUT", value: snapshot.input.compact); MetricTile(label: "CACHE READ", value: snapshot.cacheRead.compact); MetricTile(label: "OUTPUT", value: snapshot.output.compact) }
             ForEach(snapshot.platforms) { PlatformRow(platform: $0) }

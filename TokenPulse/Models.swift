@@ -11,8 +11,19 @@ struct PulseSnapshot: Codable {
     let cacheHitRate: Double
     let activeSessions: Int
     let sessions: Int
+    let alerts: [AlertSnapshot]?
     let platforms: [PlatformSnapshot]
     let hardware: HardwareSnapshot?
+}
+
+struct AlertSnapshot: Codable, Identifiable {
+    let id: String
+    let severity: String
+    let type: String
+    let title: String
+    let detail: String
+    let action: String
+    let createdAt: Double
 }
 
 struct PlatformSnapshot: Codable, Identifiable {

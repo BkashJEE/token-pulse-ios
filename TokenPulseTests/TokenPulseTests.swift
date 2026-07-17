@@ -57,6 +57,6 @@ final class TokenPulseTests: XCTestCase {
 private struct DelayedClient: SnapshotFetching {
     func fetch(serverURL: String, accessKey: String) async throws -> PulseSnapshot {
         try await Task.sleep(for: accessKey == "old" ? .milliseconds(50) : .milliseconds(1))
-        return PulseSnapshot(schema: 1, fetchedAt: 1, receivedAt: 1, total: accessKey == "old" ? 1 : 2, input: 0, output: 0, cacheRead: 0, cacheHitRate: 0, activeSessions: 0, sessions: 0, platforms: [], hardware: nil)
+        return PulseSnapshot(schema: 1, fetchedAt: 1, receivedAt: 1, total: accessKey == "old" ? 1 : 2, input: 0, output: 0, cacheRead: 0, cacheHitRate: 0, activeSessions: 0, sessions: 0, alerts: nil, platforms: [], hardware: nil)
     }
 }
