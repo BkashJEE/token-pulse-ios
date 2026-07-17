@@ -78,7 +78,7 @@ private struct DashboardView: View {
             header
             if let hardware = snapshot.hardware {
                 VStack(alignment: .leading, spacing: 7) { Text("AGENT READINESS").metricLabel(); Text(hardware.recommendation.mode).font(.system(size: 34, weight: .bold, design: .rounded)).foregroundStyle(pulseGreen); Text(hardware.recommendation.route).font(.caption).foregroundStyle(.secondary) }.frame(maxWidth: .infinity, alignment: .leading).padding(.vertical, 18)
-                HStack(spacing: 8) { MetricTile(label: "CPU LOAD", value: "\(Int(hardware.cpu.utilization))%"); MetricTile(label: "MEMORY", value: "\(Int(hardware.memory.utilization))%"); MetricTile(label: "GPU VRAM", value: "\(hardware.gpu.vramGb, specifier: "%.0f") GB") }
+                HStack(spacing: 8) { MetricTile(label: "CPU LOAD", value: "\(Int(hardware.cpu.utilization))%"); MetricTile(label: "MEMORY", value: "\(Int(hardware.memory.utilization))%"); MetricTile(label: "GPU VRAM", value: String(format: "%.0f GB", hardware.gpu.vramGb)) }
                 ReadinessRow(hardware: hardware)
             }
             HStack { Text("Provider quotas").font(.headline); Spacer(); Text("Account allowance").font(.caption2).foregroundStyle(.secondary) }.padding(.top, 14)

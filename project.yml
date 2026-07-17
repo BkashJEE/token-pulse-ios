@@ -22,4 +22,16 @@ targets:
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
     scheme:
-      testTargets: []
+      testTargets:
+        - TokenPulseTests
+  TokenPulseTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - TokenPulseTests
+    dependencies:
+      - target: TokenPulse
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.bkashjee.tokenpulse.mobile.tests
+        GENERATE_INFOPLIST_FILE: YES
