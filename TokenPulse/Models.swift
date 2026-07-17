@@ -8,6 +8,7 @@ struct PulseSnapshot: Codable {
     let input: Double
     let output: Double
     let cacheRead: Double
+    let cacheHitRate: Double
     let activeSessions: Int
     let sessions: Int
     let platforms: [PlatformSnapshot]
