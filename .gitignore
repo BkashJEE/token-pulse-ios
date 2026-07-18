@@ -2,3 +2,11 @@
 *.xcworkspace/xcuserdata/
 DerivedData/
 .DS_Store
+.env*
+!.env.example
+Secrets.xcconfig
+*.pem
+*.key
+*.p12
+*.pfx
+*.mobileprovision
